@@ -1,0 +1,134 @@
+# Runtime policy for SMACKIN’ VIP community operations.
+# This file is the operating contract. Application code loads and enforces it.
+# Change the policy here; do not bury these rules in prompts or components.
+# Last reviewed with Cole's setup facts: 2026-11-03.
+
+version: "2026-11-03"
+timezone: America/Chicago
+
+identity:
+  assistantName: "SMACKIN’ community assistant"
+  neverImpersonate:
+    - Cole
+    - Cole Schaefer
+  founderDraftLabel: "Draft for Cole — he rewrites it in his own voice and posts it himself. The assistant does not publish this as Cole."
+
+modes:
+  default: draft
+  allowed:
+    - observe
+    - draft
+    - bounded_live
+
+staffExcluded:
+  - Cole Schaefer
+  - Brian Waddick
+  - Marc
+  - Eli
+
+agentExcludedNames:
+  - "SMACKIN’ community assistant"
+
+support:
+  email: contact@smackinsnacks.com
+
+group:
+  id: "604690051505802"
+  url: https://www.facebook.com/groups/604690051505802/
+
+drive:
+  folderId: 1oNe5i3nNx-jm9ckuurF44ogtVctqicJ3
+  folderUrl: https://drive.google.com/drive/folders/1oNe5i3nNx-jm9ckuurF44ogtVctqicJ3
+  draftsDocumentId: 1eSj5KKoOdlaAAXV1HXokgmqmFtTBzptBvHIBwIG1TaI
+
+buffer:
+  channelId: 6aea4900e29c69a17150b894
+  organizationId: 6aea481c2f2977ad27bd75d1
+  schedulingType: notification
+  role: backup
+
+contentRhythm:
+  maxPostsPerWeek: 5
+  maxRoutinePostsPerDay: 1
+  pillars:
+    monday: flavor_lab
+    tuesday: member_contribution
+    wednesday: founder
+    friday: vip_event
+    sunday: what_we_heard
+
+replyCaps:
+  maxPublicRepliesPerStaffedDay: 8
+  rejectDuplicateBody: true
+  rejectQuestionOnAcknowledgement: true
+
+followUp:
+  acknowledgementRequiresTask: true
+  passedAlongRequiresHandoff: true
+  closeRequiresOutcome: true
+
+factGate:
+  blockUnverified:
+    - price
+    - offer_date
+    - access_window
+    - refund_promise
+    - scarcity
+  blockConfirmPlaceholders: true
+
+teaseWindows:
+  - id: advent_calendar_week_of_2026_11_03
+    topic: advent calendar
+    start: "2026-11-02"
+    end: "2026-11-08"
+    allowsMentionWithoutVerifiedOffer: true
+    forbids:
+      - price
+      - offer_date
+      - access_window
+      - availability
+
+metrics:
+  contributorKinds:
+    - post
+    - comment
+  reactionsSeparate: true
+  excludeStaff: true
+  excludeAgent: true
+  returnWindowsDays:
+    - 7
+    - 28
+  maturedCohortsOnly: true
+  officialSources:
+    - manual
+    - import
+  illustrationSources:
+    - sample_not_live
+  demoSources:
+    - demo_fixture
+
+memberSafety:
+  blockPublicPii: true
+  sensitiveStoriesNotMarketing: true
+
+reviewWindows:
+  timezone: America/Chicago
+  localTimes:
+    - "09:00"
+    - "13:00"
+    - "17:00"
+
+boundedLive:
+  bufferNotificationAfterApproval: true
+  stillHuman:
+    - offers
+    - refunds
+    - rules
+    - bans
+    - sensitive_cases
+    - founder_attributed_posts
+
+publication:
+  primary: human_assisted_browser
+  backup: buffer_notification
+  unattendedGroupWrite: false
